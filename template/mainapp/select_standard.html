@@ -1,0 +1,121 @@
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+        <title>Troeve-schools</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+
+<body>
+    <div class="all-top">
+        <hr>
+        <div class="all-top-1">
+
+            <h1>Troeve-Schools</h1>
+
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="mid-container">
+            <form action="/start_test/" method="POST" class="was-validated form-mid-container">
+                {% csrf_token %}
+
+                <div class="form-group std">
+
+                    {% if start_test %}
+
+                    <h5>You have given 15 minutes for writing the test,There is 10 Questions and you have to select the
+                        right answer by clicking it your answers and your marks will be note down try to finish in time,Otherwise it will quit after 15 minutes.<br><br>ALL
+                        THE BEST :)</h5>
+
+                    {% elif finish %}
+
+                    <h1>Thank you for writing the examination :)</h1>
+                    <br> <br>
+
+
+
+                    <pre style="font-family:sans-serif;">
+                    <h5>Your Score :                  <strong>{{ correct }} out of 10 </strong>
+
+Time taken :                 <strong> {{time}}</strong> 
+                    
+Want to see 		 
+Right Answers :            <button type="button" class="btn btn-primary"onclick="window.location.href= '/last_answer/?final_answer'"> Click</button></h5>
+                     
+                    
+                    </pre>
+
+
+
+
+
+                    <h4>Further Examination will be anounced and Prepare for it .. <br> Be Safe in Home.</h4>
+                    <br>
+                    <br><br>
+                    <strong>
+                        <h3>Have a Good Day :) </h3>
+                    </strong>
+                    {% else %}
+                    <div class="signin_label">
+                        <h4>Select the Standard You are Studying:)</h4>
+
+                    </div>
+
+
+
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="Option_A" name="Standard" value="Five"
+                            required>
+                        <label class="form-check-label" for="Option_A">Fifth Standard</label>
+                    </div>
+
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="Option_B" name="Standard" value="Six" required>
+                        <label class="form-check-label" for="Option_B">Sixth Standard</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="Option_C" name="Standard" value="Seven"
+                            required>
+                        <label class="form-check-label" for="Option_C">Seventh Standard</label>
+                    </div>
+
+                    {% endif %}
+
+                    {% if start_test %}
+                    <input type="submit" class="btn btn-primary submit_button" name="submit" value="Start_Test">
+                    {% elif finish %}
+                    <input type="submit" class="btn btn-primary submit_button" name="submit" onclick='delete_cookie()'
+                        value="Continue.">
+                    {% else %}
+                    <input type="submit" class="btn btn-primary submit_button" onclick='delete_cookie()' name="submit"
+                        value="Submit">
+                    {% endif %}
+
+
+
+                    <script>
+                        function delete_cookie() {
+                            document.cookie = 'Time=' + ';' + ' expires=' + a.toGMTString() + ';';
+                        }
+                    </script>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

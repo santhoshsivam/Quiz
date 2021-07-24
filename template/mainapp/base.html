@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+        <title>Troeve-schools</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+
+<body>
+    <div class="all-top">
+        <hr>
+        <div class="all-top-1">
+
+            <h1>Troeve-Schools</h1>
+
+        </div>
+        <hr>
+    </div>
+
+    <p id="demo">15:00</p>
+    {% if count and count == 1 %}
+    <p id="dlete" style="color: aliceblue;"></p>
+
+    <script>
+        var san = document.getElementById('dlete').innerHTML = delete_cookie();
+
+        function delete_cookie() {
+            document.cookie = "Time11=;max-age=0";
+            return " ";
+        }
+    </script>
+
+
+    {% endif %}
+
+    <div class="container">
+        <div class="mid-container">
+            <form action="/index/" method="POST" class="was-validated form-mid-container">
+                {% csrf_token %}
+                {{ cookie }}
+                <p> {{ vary.Question_no}}.) {{ vary.Question }}</p>
+                <div class="form-group">
+
+
+
+
+
+                    <div class="form-check">
+                        {% if answer_right.Answer == vary.Option_A %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck1"  value="{{ vary.Option_A }}" checked="checked" name="Question" required>
+                        {% elif answer_wrong.Answer == vary.Option_A %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck1" value="{{ vary.Option_A }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck1" value="{{ vary.Option_A }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck1">{{ vary.Option_A }}</label>
+                    </div>
+
+
+                    <div class="form-check">
+                        {% if answer_right.Answer == vary.Option_B %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_B }}" checked="checked" name="Question" required>
+                        {% elif answer_wrong.Answer == vary.Option_B %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_B }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_B }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck2">{{ vary.Option_B }}</label>
+                    </div>
+
+
+                    <div class="form-check">
+                        {% if answer_right.Answer == vary.Option_C %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck3" value="{{ vary.Option_C }}" checked="checked" name="Question" required>
+                        {% elif answer_wrong.Answer == vary.Option_C %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck3" value="{{ vary.Option_C }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck3" value="{{ vary.Option_C }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck3">{{ vary.Option_C }}</label>
+                    </div>
+
+                    <div class="form-check">
+                        {% if answer_right.Answer == vary.Option_D %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck4" value="{{ vary.Option_D }}" checked="checked" name="Question" required>
+                        {% elif answer_wrong.Answer == vary.Option_D %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck4" value="{{ vary.Option_D }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck4" value="{{ vary.Option_D }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck4">{{ vary.Option_D }}</label>
+                    </div>
+                    {% if answer_right %}
+                    <div class="alert alert-success alert-base">
+                        <strong>Correct ::</strong> Your answer is Right and your answer is <b>
+                            {{ answer_right.Answer }}</b>
+                    </div>
+
+                    {% elif answer_wrong %}
+                    <div class="alert alert-danger alert-base">
+                        <strong>Wrong ::</strong> Your answer is Wrong and the Right answer is <b>
+                            {{ answer_wrong.Answer }}</b>
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if answer_right or answer_wrong %}
+                    <input type="submit" onclick="setcookie()" class="btn btn-primary submit_button" name="submit"
+                        value="Next">
+                    <input type="hidden" id="cookie" class="btn btn-primary" name='cookie' value="countdown()">
+                    {% else %}
+                    <div class="alert alert-danger alert-dismissible" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Wrong</strong> Your answer is Wrong and the Right answer is {{ answer_wrong.Answer }}
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary submit_button" name="submit" onclick="setcookie()"
+                        value="Submit">
+                    <input type="hidden" id="cookie" name='cookie' value="countdown()">
+                    {% endif %}
+
+
+                </div>
+
+            </form>
+
+
+
+
+
+
+
+        </div>
+    </div>
+</body>
+<script>
+    var set_minutes = 15;
+    let time = 15 * 60;
+    let obj = document.getElementById("cookie");
+    let change = document.getElementById('demo');
+    let cookie = readcookie();
+    if (cookie[0] == true) {
+        time = cookie[1];
+    }
+    setInterval(countdown, 1000);
+
+    function countdown() {
+
+
+        const count = Math.floor(time / 60);
+        var seconds = time % 60;
+        if ((time % 60) == 0) {
+            seconds = seconds + '0';
+        }
+        if (seconds > 0 && seconds < 10) {
+            seconds = '0' + seconds;
+        }
+        
+        if(time < 0){
+           window.location.href ='/index?over=over';
+        }
+
+        countsecond = count + ":" + seconds;
+
+
+        //
+
+        //
+        obj.value = time;
+        change.innerHTML = countsecond;
+        time--;
+        return countsecond;
+
+    }
+
+    function setcookie() {
+        var time = countdown();
+        document.cookie = "Time11=" + time;
+    }
+
+    function readcookie() {
+
+        let found = document.cookie;
+
+        var b = found.split('=');
+        let f = b[0];
+        if (f == "Time11") {
+            var c = b[1].split(';');
+            var d = c[0].split(':');
+            let e = parseInt(d[0]);
+            let g = parseInt(d[1]);
+            var h = (e * 60) + g;
+            if (h != null || h == 0) {
+                return [true, h];
+            } else {
+                return false;
+            }
+
+        }
+        return false;
+    }
+</script>
+
+</html>

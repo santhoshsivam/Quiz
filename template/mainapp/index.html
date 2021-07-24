@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+    <title>Troeve-schools</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+</head>
+
+<body style="height: auto;">
+    <div class="all-top">
+        <hr>
+        <div class="all-top-1">
+
+            <h1>Troeve-Schools</h1>
+
+        </div>
+        <hr>
+    </div>
+
+    <div class="container">
+        <div class="mid-container-signin">
+            <form method="POST" action="/signin_check/" class="was-validated">
+                {% csrf_token %}
+                <div class="signin_label">
+                    <h3>Troeve-Schools</h3>
+
+
+                </div>
+                {% if sg_success %}
+                <div class="alert alert-success alert-1">
+                    You are successfully signed in,Please Login to continue.. :)
+                </div>
+                {% endif %}
+
+                {% if failed %}
+                <div class="alert alert-danger alert-1">
+                    Invalid Register number and Password,<br>If you are a new user,Please Signin
+                </div>
+                {%  endif %}
+
+                <div class="form-group">
+                    <label for="uname">Register Number:</label>
+                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd"
+                        required>
+                </div>
+
+                <div class="submit_signin">
+                    <button type="submit" onclick="window.location.href= '/signin_check/'" class="btn btn-primary"
+                        name="submit" value="Login">Login</button>
+                    <p style="text-align: center;"> or don't Have an account</p>
+                </div>
+
+
+            </form>
+
+
+
+            <div class="submit_signin">
+                <button type="submit" onclick="window.location.href= '/signin/' " class="btn btn-primary" name="submit"
+                    value="Signin">Signin</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

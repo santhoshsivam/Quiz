@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+        <title>Troeve-schools</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+
+<body style="height: auto;">
+    <div class="all-top">
+        <hr>
+        <div class="all-top-1">
+
+            <h1>Troeve-Schools</h1>
+
+        </div>
+        <hr>
+    </div>
+
+    <div class="container container-signin">
+        <div class="mid-container-signin-1">
+            <form action="/signin_check/" method="POST" class="was-validated">
+                {% csrf_token %}
+
+                <div class="signin_label">
+                    <h3>Troeve-Schools</h3>
+
+                </div>
+                {% if failed %}
+                <div class="alert alert-danger alert-1">
+                    The Register No is already registerd <br>Please try with different one.. :)
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    Full Name:
+                    <input type="text" class="form-control" id="fname" placeholder="Enter Your Full Name" name="fname"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    Register Number:
+                    <input type="text" class="form-control" id="uname" placeholder="Enter Register Number" name="uname"
+                        required>
+                </div>
+
+
+
+                <div class="form-group">
+                    Password:
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    Phone Number:
+                    <input type="text" class="form-control" id="phneno" placeholder="Enter Mobile Number" name="phneno"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    E-mail ID:
+                    <input type="mail" class="form-control" id="emailid" placeholder="Enter Email ID" name="email"
+                        required>
+                </div>
+
+                <div class="submit_signin">
+                    <button type="submit" class="btn btn-primary" name="submit" value="Signin">Signin</button>
+                    <p style="text-align: center;"> or already Have an account</p>
+                    <button type="submit" onclick="window.location.href= '/form/'" class="btn btn-primary" name="submit"
+                        value="Signup">Signup</button>
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

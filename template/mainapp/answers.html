@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="{% static 'mainapp/css/styles.css' %}">
+        <title>Troeve-schools</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+
+    </head>
+
+<body style="height: auto">
+    <div class="all-top">
+        <hr>
+        <div class="all-top-1">
+
+            <h1>Troeve-Schools</h1>
+
+        </div>
+        <hr>
+    </div>
+    <div class="container">
+        <div class="mid-container">
+                {% if varies %}    
+            <div class="signin_label">
+                    <h2>Your Right Answers</h2>
+                {% endif %}
+                
+                </div>
+            {% for vary in varies %}
+                <h4 style="margin: 15px 35px;"> {{ vary.Question_no }}.) {{ vary.Question }}</h4>
+    <form action="">
+                    <div class="form-group">
+                    <div class="form-check">
+                        {% if vary.Answer == vary.Option_A %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_A }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_A }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck2">{{ vary.Option_A }}</label>
+                    </div>
+    
+    
+                    <div class="form-check">
+                        {% if vary.Answer == vary.Option_B %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_B }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_B }}" name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck2">{{ vary.Option_B }}</label>
+                    </div>
+    
+    
+                    <div class="form-check">
+                        {% if vary.Answer == vary.Option_C %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_C }}"  checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_C }}"
+                            name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck2">{{ vary.Option_C }}</label>
+                    </div>
+    
+                    <div class="form-check">
+                        {% if vary.Answer == vary.Option_D %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_D }}" checked="checked" name="Question" required>
+                        {% else %}
+                        <input type="radio" class="form-check-input" id="validationFormCheck2" value="{{ vary.Option_D }}"
+                            name="Question" required>
+                        {% endif %}
+                        <label class="form-check-label" for="validationFormCheck2">{{ vary.Option_D }}</label>
+                    </div>
+                    {% if vary.Answer %}
+                    <div class="alert alert-success ">
+                        <strong>Correct ::</strong> The Answer you told is <b> {{ vary.Answer }}</b>
+                    </div>
+    
+                    {% endif %}
+</div>
+</form>
+    {% endfor %}
+
+       <button class="btn btn-primary answer-button-l" onclick=window.location.href="/index/">Prev</button>
+       <button class="btn btn-primary answer-button-r"onclick=window.location.href="/form/" > Next</button>             
+
+    
+       
+        </div> 
+    </div>
+</body>
+</html>
